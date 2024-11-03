@@ -1453,7 +1453,7 @@ Invoke-Bof -BOFBytes $BOFBytes -EntryPoint go -ArgumentList "foo",5
     # Marshal parameters in memory
     $ArgumentsBytes = [IntPtr]::Zero;
     $ArgumentsBytesLength = 0
-    if ($ArgumentList -ne $null)
+    if ($null -ne $ArgumentList)
     {
         $ArgumentsBytes, $ArgumentsBytesLength = Load-BeaconParameters -ArgumentList $ArgumentList -UnicodeStringParameter $UnicodeStringParameter
     }
