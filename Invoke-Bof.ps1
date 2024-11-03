@@ -1027,6 +1027,26 @@ Invoke-Bof -BOFBytes $BOFBytes -EntryPoint go -ArgumentList "foo",5
             Write-Debug "[+] Resolving BeaconSpawnTemporaryProcess"
             return [System.Runtime.InteropServices.Marshal]::GetFunctionPointerForDelegate($BeaconAPI.toWideChar)
         }
+        elseif($Symbol -eq "__imp_GetProcAddress")
+        {
+            Write-Debug "[+] Resolving GetProcAddress"
+            $Name = "__imp_KERNEL32`$GetProcAddress"
+        }
+        elseif($Symbol -eq "__imp_LoadLibraryA")
+        {
+            Write-Debug "[+] Resolving LoadLibraryA"
+            $Name = "__imp_KERNEL32`$LoadLibraryA"
+        }
+        elseif($Symbol -eq "__imp_FreeLibrary")
+        {
+            Write-Debug "[+] Resolving FreeLibrary"
+            $Name = "__imp_KERNEL32`$FreeLibrary"
+        }
+        elseif($Symbol -eq "__imp_GetModuleHandleA")
+        {
+            Write-Debug "[+] Resolving GetModuleHandleA"
+            $Name = "__imp_KERNEL32`$GetModuleHandleA"
+        }
 
         # If it's not part of the beacon API
         # we will try to resolve it
